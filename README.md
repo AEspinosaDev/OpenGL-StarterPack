@@ -2,7 +2,7 @@
 
 OpenGL-StarterPack (GLSP) is a lightweight open source OpenGL based framework that facilitates and speeds up project creation by offering a thin and flexible abstraction to the basic objects of OpenGL.
  
-GLSP is simple and aims for simplicity, adding only a light layer of abstraction to OpenGL. All its classes are designed to be inherited and converted into more complex objects, in case they are used as a base for more serious applications. 
+GLSP is simple and aims for simplicity, adding only a light layer of abstraction to OpenGL. All its classes are designed to be easy inherited and converted into more complex objects, in case they are used as a base for more serious applications. 
 
 Finally, GLSP comes with the main lightweight libraries used in graphics already included and integrated, to offer the user their functionality from the start.
 
@@ -73,10 +73,76 @@ cmake -DBUILD_EXAMPLES=OFF /path/to/source
 
 ## Project Integration ⚙️
 
+Integration of GLSP into your own personal project is quite easy. If working with CMake, GLSP should be inserted inside the dependencies folder of your project root directory.
+
+On your main project CMakeLists.txt, write:
+
+```cmake
+
+cmake_minimum_required(VERSION 3.16)
+
+project(JohnDoe VERSION 1.0.0)
+
+# Add GLSP subdirectory ! Set if you want to build the examples directory ...
+set(GLSP_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+add_subdirectory(dependencies/OpenGL-StarterPack)
+
+#Setup project own source code (User-Defined)
+file(GLOB APP_SOURCES "src/*.cpp")
+file(GLOB APP_HEADERS "include/*.h")
+add_executable(JohnDoe ${APP_SOURCES} ${APP_HEADERS})
+target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/)
+
+# Link project against GLSP
+target_link_libraries(JohnDoe PRIVATE GLSP)
+
+....
+
+```
+
+Your project structure should be somewhat like this one:
+
+```
+project_root/
+│
+├── resources/
+│   ├── shaders
+│   ├── textures
+│   └── meshes
+│
+├── dependencies/
+│   ├── OpenGL-StarterPack
+│   └── another-cool-dependencies
+│
+├── src/
+│   ├── main.cpp
+│   └── compilation_file1.cpp
+│
+├── include/
+│   ├── header1.h
+│   └── header2.h
+│
+└── CMakeLists.txt
+````
+
+
+
+If you are not working with CMake, sorry, but it is time for you to know... 
+**you should be !!** 
+Nah, just kidding 🙄 you can check how to include GLSL as a dependency in your IDE of choice. With luck, your IDE should not be difficult to handle.
+
+
 
 ## Usage ✨
 
+I encourage you to check the examples directory if you want to see how to use this framework.
 
+- The simple example can serve as a quite good starting point for any project.
+- Complex example shows how to work with a more complex OpenGL (different shader stages, compute, uniform buffers, user defined geometry)
+
+As told in introduction, GLSP encourages you to take all that it has in order for you to modify it and turn it into yout own purposes.
+
+It is also a good starting point for anyone trying to learn computer graphics or a simple graphics API such as OpenGL, as its thin abstraction facilitates the comprehension of OpenGL workarounds.
 
 
 
