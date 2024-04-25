@@ -6,7 +6,7 @@ GLSP is simple and aims for simplicity, adding only a light layer of abstraction
 
 Finally, GLSP comes with the main lightweight libraries used in graphics already included and integrated, to offer the user their functionality from the start.
 
-The philosophy of GLSP is based on inheritance. It provides a simple skeleton that can be easily modified so that the user can quickly achieve their goals.
+The philosophy of GLSP is based on inheritance. It provides a simple skeleton that can be easily modified so that the user can quickly achieve their goals. Thanks to this, it is also perfect for learning purposes ! 
 
 <div align="center">
   <img src="https://github.com/AEspinosaDev/OpenGL-StarterPack/assets/79087129/9c16d64f-7fed-4810-a17f-e48ac5182dbf" alt="image" width="50%"/>
