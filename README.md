@@ -1,4 +1,4 @@
-# OpenGL-StarterPack (GLSP) 
+# OpenGL-StarterPack (GLSP) 📦
 
 OpenGL-StarterPack (GLSP) is a lightweight open source OpenGL based framework that facilitates and speeds up project creation by offering a thin and flexible abstraction to the basic objects of OpenGL.
  
