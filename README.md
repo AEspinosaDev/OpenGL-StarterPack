@@ -27,7 +27,7 @@ The philosophy of GLSP is based on inheritance. It provides a simple skeleton th
 
 The prequisites for using this code are:
 
-- Windows 10, 11, Linux.
+- Windows 10, 11, Ubuntu 24.*.
 - CMake installed.
 
 1. Clone the repo:
