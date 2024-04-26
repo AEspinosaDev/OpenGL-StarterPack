@@ -121,32 +121,25 @@ I encourage you to check the examples directory if you want to see how to use th
 
 As told in introduction, GLSP encourages you to take all that it has in order for you to modify it and turn it into yout own purposes.
 
-## Main Data Classes 🧩
-
-- **Renderer**: A simple class that implements all the functions associated with a renderer (creation and control of the graphics context, flow control, drawing loops, and updates). It is imperative that it be inherited and modified to create more complex and robust applications.
-
-- **Buffer**: Wrappers of VAOs, VBOs, IBOs, and UBOs that allow the user to have complete control over their creation and use.
-
-- **Camera**: A class that implements all the basic functionalities that a virtual camera should have.
-
-- **Controller**: A class that serves as an interface between the spatial movement of 3D objects and user input. Useful for controlling the camera, for example.
-
-- **Framebuffer**: Practically and flexibly abstracts FBOs and RBOs.
-
-- **Loaders**: A namespace that offers some resource loading functions (.obj, .ply, images).
-
-- **Mesh**: Abstracts and represents a mesh, composed, among others, of a geometry class and a material class. Inherits from Object3D, the base class that represents any object capable of being placed in a virtual world, characterized by its transformation.
-
-- **Shader**: Abstracts the functionality of OpenGL programs and the compilation of the different stages of the graphics and compute pipeline. GLSP shaders allow implementing all the functionality of the graphics pipeline in a single .glsl file, marking each part with a hashtag followed by the word "stage" and the name of the graphics stage (vertex, control, eval, geometry, fragment). It also allows separate files.
-
-- **Texture**: Abstracts the functionality of OpenGL samplers and images. It is flexible, and through its configuration, all types of textures can be created.
-
-- **Widgets**: A namespace that offers some functions to create utility widgets based on ImGui.
-
-- **Material**: A very basic material class that abstracts and combines the concepts of the graphics pipeline, its handling, and object-level state control. For simple projects, it is not necessary, and its modification and inheritance are recommended to create more secure and solid materials in more serious projects.
-
 It is also a good starting point for anyone trying to learn computer graphics or a simple graphics API such as OpenGL, as its thin abstraction facilitates the comprehension of OpenGL workarounds.
 
+## Main Data Classes 🧩
+
+Class  | Description
+--------------------- | ---------------------------------------------------------
+ **[Renderer](include/GLSP/renderer.h)** | A simple class that implements all the functionality associated with a renderer (creation and control of the graphic context, flow control, drawing loops, and updates). It is imperative that it be inherited and modified to create more complex and robust applications.
+ **[Buffer](include/GLSP/buffers.h)** | Wrappers of VAOs, VBOs, IBOs, and UBOs that allow the user to have complete control over their creation and use.
+ **[Camera](include/GLSP/camera.h)** | A class that implements all the basic functionalities that a virtual camera should have.
+ **[Controller](include/GLSP/controller.h)** | A class that serves as an interface between the spatial movement of 3D objects and user input. Useful for controlling the camera, for example.
+ **[Framebuffer](include/GLSP/framebuffer.h)** | Practical and flexible abstraction of FBOs and RBOs.
+ **[Loaders](include/GLSP/loaders.h)** | A namespace that offers some resource loading functions (.obj, .ply, images).
+ **[Mesh](include/GLSP/mesh.h)** | Abstracts and represents a mesh, composed, among others, of a geometry class and a material class. Inherits from Object3D, the base class that represents any object capable of being placed in a virtual world, characterized by its transform struct.
+ **[Shader](include/GLSP/shader.h)** | Abstracts the functionality of OpenGL programs and the compilation of the different stages of the graphics and compute pipelines. GLSP shaders allow implementing all the functionality of the graphics pipeline in a single .glsl file, marking each part with a hashtag followed by the word *stage* and the name of the graphics stage itself (vertex, control, eval, geometry and fragment). It also allows separate files parsing as usual.
+ **[Texture](include/GLSP/texture.h)** | Abstracts the functionality of OpenGL samplers and images. It is flexible, and through its configuration, all types of textures can be created.
+ **[Widgets](include/GLSP/widgets.h)** | A namespace that offers some functions to create utility widgets based on ImGui.
+ **[Material](include/GLSP/material.h)** | A very basic material class that abstracts and combines the concepts of the graphics pipeline, its handling, and object-level state control. For simple projects, it is not necessary, and its modification and inheritance are recommended to create more secure and solid materials in more serious projects.
+
+Along with these classes, there are plenty of other auxiliar classes and structs and error handling functions.
 
 ## Integrated Libraries 📚
 
