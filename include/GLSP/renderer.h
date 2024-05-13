@@ -157,6 +157,10 @@ public:
     {
         GL_CHECK(glDepthMask(op));
     }
+    inline static void set_depth_func(DepthFuncType func)
+    {
+        GL_CHECK(glDepthFunc(func));
+    }
     inline static void enable_blend(bool op)
     {
         op ? glEnable(GL_BLEND) : glDisable(GL_BLEND);

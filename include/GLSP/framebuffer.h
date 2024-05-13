@@ -1,11 +1,11 @@
 /*
     This file is part of OpenGL-StarterPack (GLSP), an open source OpenGL based framework
-    that facilitates and speeds up demo and project creation by offering an abstraction to 
-    the basic objects of OpenGL as well as incluing the necessary libraries. 
+    that facilitates and speeds up demo and project creation by offering an abstraction to
+    the basic objects of OpenGL as well as incluing the necessary libraries.
 
     MIT License
 
-	Copyright (c) 2024 Antonio Espinosa Garcia
+    Copyright (c) 2024 Antonio Espinosa Garcia
 
 */
 #ifndef __FRAMEBUFFER__
@@ -53,11 +53,7 @@ class Framebuffer
 
 public:
     Framebuffer(Extent2D extent, std::vector<Attachment> attachments, unsigned int samples = 1) : m_extent(extent), m_attachments(attachments), m_samples(samples) {}
-    ~Framebuffer()
-    {
-        GL_CHECK(glDeleteFramebuffers(1, &m_id));
-        // delete m_attachments;
-    };
+    ~Framebuffer() { cleanup(); }
 
     inline unsigned int get_id() const { return m_id; }
 
@@ -84,13 +80,15 @@ public:
 
     void unbind() const;
 
+    inline void cleanup() { GL_CHECK(glDeleteFramebuffers(1, &m_id)); }
+
     /*
     Copy source framebuffer data to the destiny framebuffer. If framebuffer pointer is set to null,
     it will use the defalt framebuffer
     */
     static void blit(const Framebuffer *const src, const Framebuffer *const dst, unsigned int mask, unsigned int filter,
-              Extent2D srcExtent, Extent2D dstExtent,
-              Position2D srcOrigin = {0, 0}, Position2D dstOrigin = {0, 0});
+                     Extent2D srcExtent, Extent2D dstExtent,
+                     Position2D srcOrigin = {0, 0}, Position2D dstOrigin = {0, 0});
 
     static void bind_default();
 
@@ -101,7 +99,7 @@ public:
     static void clear_depth_bit();
 
     static void clear_bits(unsigned int bits = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-   
+
     static void set_clear_color(glm::vec4 color);
 };
 

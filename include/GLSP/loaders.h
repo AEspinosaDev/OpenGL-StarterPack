@@ -1,11 +1,11 @@
 /*
     This file is part of OpenGL-StarterPack (GLSP), an open source OpenGL based framework
-    that facilitates and speeds up demo and project creation by offering an abstraction to 
-    the basic objects of OpenGL as well as incluing the necessary libraries. 
+    that facilitates and speeds up demo and project creation by offering an abstraction to
+    the basic objects of OpenGL as well as incluing the necessary libraries.
 
     MIT License
 
-	Copyright (c) 2024 Antonio Espinosa Garcia
+    Copyright (c) 2024 Antonio Espinosa Garcia
 
 */
 #ifndef __LOADERS__
@@ -27,8 +27,8 @@ namespace loaders
 
     void load_PLY(Mesh *const mesh, const char *fileName, bool preload = true, bool verbose = false, bool calculateTangents = false);
 
-    void load_image(Texture* const texture, const char *fileName);
-    
+    void load_image(Texture *const texture, const char *fileName, bool isPanorama = false);
+
 }
 
 GLSP_NAMESPACE_END

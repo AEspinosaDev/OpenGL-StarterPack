@@ -1,11 +1,11 @@
 /*
     This file is part of OpenGL-StarterPack (GLSP), an open source OpenGL based framework
-    that facilitates and speeds up demo and project creation by offering an abstraction to 
-    the basic objects of OpenGL as well as incluing the necessary libraries. 
+    that facilitates and speeds up demo and project creation by offering an abstraction to
+    the basic objects of OpenGL as well as incluing the necessary libraries.
 
     MIT License
 
-	Copyright (c) 2024 Antonio Espinosa Garcia
+    Copyright (c) 2024 Antonio Espinosa Garcia
 
 */
 #include <GLSP/loaders.h>
@@ -130,7 +130,7 @@ void loaders::load_OBJ(Mesh *const mesh, const char *fileName, bool importMateri
                 }
             }
 
-        mesh->set_geometry(new Geometry(vertices,indices));
+        mesh->set_geometry(new Geometry(vertices, indices));
 
         shape_id++;
     }
@@ -349,7 +349,7 @@ void loaders::load_PLY(Mesh *const mesh, const char *fileName, bool preload, boo
             indices.push_back(facesData[3 * i + 2]);
         }
 
-        mesh->set_geometry(new Geometry(vertices,indices));
+        mesh->set_geometry(new Geometry(vertices, indices));
 
         return;
     }
@@ -359,43 +359,72 @@ void loaders::load_PLY(Mesh *const mesh, const char *fileName, bool preload, boo
     }
 }
 
-void loaders::load_image(Texture *const texture, const char *fileName)
+void loaders::load_image(Texture *const texture, const char *fileName, bool isPanorama)
 {
     Image img = texture->get_image();
-    if (img.data)
+    img.path = fileName;
+    img.panorama = isPanorama;
+
+    if (img.data || img.HDRdata)
         DEBUG_LOG("Image data already in texture");
 
     // Check extension
     const std::string PNG = "png";
     const std::string JPG = "jpg";
+    const std::string HDR = "hdr";
+    const std::string EXR = "exr";
 
     int desiredChannels = 4;
 
     std::string fileNameStr(fileName);
     size_t dotPosition = fileNameStr.find_last_of(".");
-    if (dotPosition != std::string::npos)
-    {
-        std::string fileExtension = fileNameStr.substr(dotPosition + 1);
+    std::string fileExtension = "";
+
+    // Set file extension for further checks
+    if (dotPosition != std::string::npos) {
+        fileExtension = fileNameStr.substr(dotPosition + 1);
 
         if (fileExtension == PNG)
             desiredChannels = 4;
         if (fileExtension == JPG)
             desiredChannels = 3;
-        // TO DO.. manage more types of files
     }
 
     int w, h;
-    unsigned char *cache = stbi_load(fileName, &w, &h, &img.channels, desiredChannels);
-    if (cache == nullptr)
+    if (fileExtension != HDR && fileExtension != EXR) // If not HDR Image
     {
-        ERR_LOG(stbi_failure_reason());
-        return;
+      
+
+        unsigned char *cache = stbi_load(fileName, &w, &h, &img.channels, desiredChannels);
+        if (cache == nullptr)
+        {
+            ERR_LOG(stbi_failure_reason());
+            return;
+        }
+
+        img.linear = true;
+        img.data = cache;
+    }
+    else
+    { // If HDR Image
+
+        float *HDRcache = stbi_loadf(fileName, &w, &h, &img.channels, 0);
+
+        if (HDRcache == nullptr)
+        {
+            ERR_LOG(stbi_failure_reason());
+            return;
+        }
+
+        img.linear = false;
+        img.HDRdata = HDRcache; // Fill float pointer, for having higher color precission
     }
 
-    img.data = cache;
+    img.extent = {w, h};
+    if (!isPanorama)
+        texture->set_extent(img.extent);
 
     // Update texture
-    texture->set_extent({w, h});
     texture->set_image(img);
 }
 GLSP_NAMESPACE_END

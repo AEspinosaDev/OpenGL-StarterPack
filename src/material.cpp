@@ -65,13 +65,13 @@ void Material::setup_pipeline() const
     Renderer::enable_face_cull(m_pipeline.state.cullFace);
     Renderer::enable_depth_test(m_pipeline.state.depthTest);
     Renderer::enable_depth_writes(m_pipeline.state.depthWrites);
+    Renderer::set_depth_func(m_pipeline.state.depthFunction);
+
     if (m_pipeline.state.blending)
     {
         Renderer::enable_blend(true);
         Renderer::set_blend_func_separate(m_pipeline.state.blendingFuncSRC, m_pipeline.state.blendingFuncDST);
-        // GL_CHECK(glBlendFunc(m_pipeline.state.blendingFuncSRC,
-        //                      m_pipeline.state.blendingFuncDST));
-        Renderer::set_blend_op(ADD);
+        Renderer::set_blend_op(m_pipeline.state.blendingOperation);
     }
     else
     {
