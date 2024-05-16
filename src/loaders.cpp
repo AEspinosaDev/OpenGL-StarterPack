@@ -240,7 +240,15 @@ void loaders::load_PLY(Mesh *const mesh, const char *fileName, bool preload, boo
             if (verbose)
                 std::cerr << "tinyply exception: " << e.what() << std::endl;
         }
-
+        try
+        {
+            texcoords = file.request_properties_from_element("vertex", {"s", "t"});
+        }
+        catch (const std::exception &e)
+        {
+            if (verbose)
+                std::cerr << "tinyply exception: " << e.what() << std::endl;
+        }
         // Providing a list size hint (the last argument) is a 2x performance improvement. If you have
         // arbitrary ply files, it is best to leave this 0.
         try
