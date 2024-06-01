@@ -90,6 +90,7 @@ protected:
     void panorama_to_cubemap();
 
     static Shader *HDRIConverterShader;
+    static Shader *IrradianceComputeShader;
 
 public:
     Texture(Extent2D extent) : m_extent(extent) {}
@@ -121,6 +122,10 @@ public:
     inline bool is_generated() const { return m_generated; }
 
     inline void cleanup() { GL_CHECK(glDeleteTextures(1, &m_id)); }
+
+    void generate_mipmaps();
+
+    Texture *compute_irradiance(int resolution = 32);
 };
 
 GLSP_NAMESPACE_END
