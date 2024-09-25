@@ -3,15 +3,7 @@
 
 #include <filesystem>
 
-#include <GLSP/renderer.h>
-#include <GLSP/framebuffer.h>
-#include <GLSP/buffers.h>
-#include <GLSP/shader.h>
-#include <GLSP/mesh.h>
-#include <GLSP/loaders.h>
-#include <GLSP/controller.h>
-#include <GLSP/camera.h>
-#include <GLSP/widgets.h>
+#include <GLSP/glsp.h>
 
 USING_NAMESPACE_GLSP
 
